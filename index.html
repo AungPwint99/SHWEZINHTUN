@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal Website</title>
+    <style>
+        /* Basic styling */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #FFF5F5;
+            font-family: Arial, sans-serif;
+            color: #FF6F6F;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 20px;
+        }
+
+        #buttons-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #FFB6C1;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #FF8C8C;
+        }
+
+        #play-music {
+            background-color: #FF8C8C;
+            margin-top: 10px;
+            padding: 5px 15px;
+            font-size: 16px;
+        }
+
+        /* Add a class for the sticker */
+        #sticker {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="proposal-text">Ako ko chit lar shewwzin 💖</h1>
+    <img id="gif" src="https://media.giphy.com/media/7zGmpJmwUp5lNFudOf/giphy.gif?cid=790b7611qgz19zcim8h8uwzfbguyayl53pqu30vgm62cqrwn&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="heart gif">
+
+    <div id="buttons-container">
+        <button id="yes-btn" class="btn">Yes</button>
+        <button id="no-btn" class="btn">No</button>
+    </div>
+
+    <!-- Play Music Button -->
+    <button id="play-music" class="btn">Play Music</button>
+
+    <!-- Audio element with loop enabled -->
+    <audio id="background-music" loop>
+        <source src="https://www.dropbox.com/scl/fi/ejl5or10yf2yot47c9l94/Stephen-Sanchez-Em-Beihold-Until-I-Found-You-Lyrics-mix....mp3?rlkey=mqbto7eypk5cuu86bolm8xm9o&st=7fw1nlkh&dl=1" type="audio/mpeg">
+    </audio>
+
+    <!-- Sticker image (hidden initially) -->
+    <img id="sticker" src="https://media.giphy.com/media/J15kf9dOEIeSk/giphy.gif?cid=790b7611q03cv69ahmbzz3ppy6w6boxq89c9djmmbypq70uv&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt="Sticker">
+
+    <script>
+        const yesBtn = document.getElementById("yes-btn");
+        const noBtn = document.getElementById("no-btn");
+        const playMusicBtn = document.getElementById("play-music");
+        const backgroundMusic = document.getElementById("background-music");
+        const proposalText = document.getElementById("proposal-text");
+        const gif = document.getElementById("gif");
+        const sticker = document.getElementById("sticker"); // Sticker element
+
+        // Counter to track clicks on "Yes" button
+        let yesClicks = 0;
+
+        // Moving "No" button function
+        noBtn.addEventListener("mouseover", () => {
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // Play music button click event
+        playMusicBtn.addEventListener("click", () => {
+            backgroundMusic.play();  // Play the music
+            playMusicBtn.style.display = 'none';  // Hide the button after it's clicked
+        });
+
+        // Click handler for "Yes" button
+        yesBtn.addEventListener("click", () => {
+            yesClicks++;
+
+            if (yesClicks === 1) {
+                // First click
+                proposalText.innerText = "omgg please say it again 😍";
+                yesBtn.innerText = "Chit Par Tal Ako";
+                gif.src = "https://media.giphy.com/media/wPnbkEcr2tXiTN0Lmq/giphy.gif?cid=790b7611enobd1rtjbovjexphke0mhzncmo7rn5r9y59y5zg&ep=v1_gifs_search&rid=giphy.gif&ct=g";
+            } else if (yesClicks === 2) {
+                // Second click
+                proposalText.innerText = "Love You So Much KoKoee ThaeThae Lyy 💕";
+                yesBtn.innerText = "KoKo yay Chit Par Tal Shinnzzz";
+                gif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZW5vYmQxcnRqYm92amV4cGhrZTBtaHpuY21vN3JuNXI5eTU5eTV6ZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/IzXiddo2twMmdmU8Lv/giphy.gif";
+            } else if (yesClicks === 3) {
+                // Third click
+                proposalText.innerText = "hawwww byar , arrrr bwarrrr uuu Mouchhhhhhhhh 💕";
+                yesBtn.innerText = "arrrrr bwarrrrr koko";
+                gif.src = "https://media.giphy.com/media/qCT06WLJURMyfsEi2r/giphy.gif?cid=ecf05e47df2oy1lk0ony1c0p1qhbm9vpayxxonh1k94u3dyx&ep=v1_gifs_search&rid=giphy.gif&ct=g";
+                
+                // After the third click, remove the "No" button from the DOM entirely
+                noBtn.remove(); // This will completely remove the "No" button
+            }
+        });
+
+        // "arrrrr bwarrrrr koko" click to show the sticker
+        yesBtn.addEventListener("click", () => {
+            if (yesClicks === 3) {
+                // Show the sticker only when this button is clicked for the third time
+                sticker.style.display = 'block'; // Make the sticker visible
+            }
+        });
+    </script>
+
+</body>
+</html>
